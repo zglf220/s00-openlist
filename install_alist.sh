@@ -17,7 +17,7 @@ if [ "$(basename "$(pwd)")" == "public_nodejs" ]; then
     files=("app.js" "start.sh" "package.json" "web.js")
     urls=(
         "https://raw.githubusercontent.com/jinnan11/serv00-alist/main/alist/app.js"
-        "https://raw.githubusercontent.com/jinnan11/serv00-alist/main/alist/start.sh"
+        "https://raw.githubusercontent.com/zglf220/s00-openlist/refs/heads/main/alist/start.sh"
         "https://raw.githubusercontent.com/jinnan11/serv00-alist/main/alist/package.json"
         "https://github.com/OpenListTeam/OpenList/releases/download/beta/openlist-freebsd-amd64.tar.gz"
     )
