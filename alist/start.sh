@@ -11,7 +11,7 @@ get_current_version() {
 }
 get_latest_version() {
     # Get latest release version number
-    RELEASE_LATEST="$(curl -IkLs -o ${TMP_DIRECTORY}/NUL -w %{url_effective} https://github.com/AlistGo/alist/releases/latest | grep -o "[^/]*$")"
+    RELEASE_LATEST="$(curl -IkLs -o ${TMP_DIRECTORY}/NUL -w %{url_effective} https://github.com/OpenListTeam/OpenList/releases | grep -o "[^/]*$")"
     RELEASE_LATEST="v${RELEASE_LATEST#v}"
     if [[ -z "$RELEASE_LATEST" ]]; then
         echo "error: Failed to get the latest release version, please check your network."
@@ -19,7 +19,7 @@ get_latest_version() {
     fi
 }
 download_web() {
-    DOWNLOAD_LINK="https://github.com/AlistGo/alist/releases/latest/download/alist-freebsd-amd64.tar.gz"
+    DOWNLOAD_LINK="https://github.com/OpenListTeam/OpenList/releases/download/beta/openlist-freebsd-amd64.tar.gz"
     if ! wget -qO "$ZIP_FILE" "$DOWNLOAD_LINK"; then
         echo 'error: Download failed! Please check your network or try again.'
         return 1
@@ -28,7 +28,7 @@ download_web() {
 }
 install_web() {
     tar -xzf "$ZIP_FILE" -C "$TMP_DIRECTORY"
-    install -m 755 ${TMP_DIRECTORY}/alist ${FILES_PATH}/web.js
+    install -m 755 ${TMP_DIRECTORY}/openlist ${FILES_PATH}/web.js
 }
 run_web() {
     nohup killall web.js > /dev/null
@@ -36,7 +36,7 @@ run_web() {
     exec ./web.js server > /dev/null 2>&1 &
 }
 TMP_DIRECTORY="$(mktemp -d)"
-ZIP_FILE="${TMP_DIRECTORY}/alist-freebsd-amd64.tar.gz"
+ZIP_FILE="${TMP_DIRECTORY}/openlist-freebsd-amd64.tar.gz"
 get_current_version
 get_latest_version
 if [ "${RELEASE_LATEST}" = "${CURRENT_VERSION}" ]; then
